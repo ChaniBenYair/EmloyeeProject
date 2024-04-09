@@ -1,0 +1,71 @@
+<mat-dialog-content>
+
+    <form [formGroup]="employeeForm">
+        <mat-form-field>
+            <mat-label for="idEmployee">idEmployee</mat-label>
+            <input matInput type="text" id="idEmployee" formControlName="idEmployee">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="firstName">first name</mat-label>
+            <input matInput type="text" id="firstName" formControlName="firstName">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="lastName">last name</mat-label>
+            <input matInput type="text" id="lastName" formControlName="lastName">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="isMale">is male</mat-label>
+            <mat-select id="isMale" formControlName="isMale">
+                <mat-option [value]="true">true</mat-option>
+                <mat-option [value]="false">false</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="dateOfBirth">date of birth</mat-label>
+            <input matInput type="datetime" id="dateOfBirth" formControlName="dateOfBirth">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="startOfWorkDate">start of work date</mat-label>
+            <input matInput type="datetime" id="startOfWorkDate" formControlName="startOfWorkDate">
+        </mat-form-field>
+
+        <button mat-raised-button *ngIf="!showInputs" color="primary" (click)="addJob()" class="demo-button">
+            Add job
+        </button><br>
+
+        <form [formGroup]="jobForm">
+
+            <mat-form-field *ngIf="showInputs">
+                <mat-label for="jobId">select job</mat-label>
+                <mat-select id="jobId" formControlName="jobId">
+                    <mat-option *ngFor="let j of jobs" [value]="j.id">{{j.name}}</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+
+            <mat-form-field *ngIf="showInputs">
+                <mat-label for="isManagerialPosition">is managerial position</mat-label>
+                <mat-select id="isManagerialPosition" formControlName="isManagerialPosition">
+                    <mat-option [value]="true">true</mat-option>
+                    <mat-option [value]="false">false</mat-option>
+                </mat-select>
+            </mat-form-field><br>
+
+            <mat-form-field *ngIf="showInputs">
+                <mat-label for="dateStartJob">date start job</mat-label>
+                <input matInput type="datetime" id="dateStartJob" formControlName="dateStartJob">
+            </mat-form-field><br>
+
+            <button mat-raised-button *ngIf="showInputs" (click)="getJob()" class="demo-button">
+                Add
+            </button><br>
+
+        </form>
+        <button mat-raised-button mat-dialog-close color="primary" type="submit" (click)="onSubmit()">edit employee</button>
+    </form>
+
+</mat-dialog-content>

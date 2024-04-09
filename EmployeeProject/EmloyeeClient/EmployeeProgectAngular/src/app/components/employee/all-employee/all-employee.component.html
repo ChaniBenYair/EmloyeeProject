@@ -1,0 +1,65 @@
+<div class="all">
+
+    <div class="demo-button-container">
+        <div class="add">
+            <button mat-raised-button (click)="addEmployee()" class="demo-button">
+                Add employee
+            </button>
+            <button mat-raised-button (click)="downloadToExcel()" class="demo-button">
+                <mat-icon aria-hidden="false" aria-label="Example Download icon" fontIcon="download"></mat-icon>
+            </button>
+        </div>
+
+        <div class="filter">
+            <mat-form-field>
+                <mat-label>search</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+
+        <ng-container class="a" matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef>first name</th>
+            <td mat-cell *matCellDef="let element">{{element.firstName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef>last name</th>
+            <td mat-cell *matCellDef="let element">{{element.lastName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="idEmployee">
+            <th mat-header-cell *matHeaderCellDef>id</th>
+            <td mat-cell *matCellDef="let element">{{element.idEmployee}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="dateStartOfWork">
+            <th mat-header-cell *matHeaderCellDef>date start of work</th>
+            <td mat-cell *matCellDef="let element">{{element.dateStartOfWork}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-raised-button [disabled]="!dataSource.data.length" (click)="editData(element)"
+                    class="demo-button">
+                    <mat-icon aria-hidden="false" aria-label="Example delete icon" fontIcon="edit"></mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-raised-button (click)="removeData(element)" class="demo-button">
+                    <mat-icon aria-hidden="false" aria-label="Example delete icon" fontIcon="delete"></mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
